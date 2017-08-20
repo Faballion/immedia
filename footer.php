@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="js/jquery.bootstrap-growl.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
 

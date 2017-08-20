@@ -1,8 +1,14 @@
 <?php
 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "immedia";
+
 $postType = $_POST['postType'];
 
 switch ($postType) {
+
 	case "searchLocations":
 		$searchTerm = $_POST['search-term'];
 		$latitude = $_POST['latitude'];
@@ -18,10 +24,6 @@ switch ($postType) {
 		curl_close($curlhandle);
 
 		//Insert locations into database
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "immedia";
 		
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		
@@ -61,7 +63,7 @@ switch ($postType) {
 			}
 
 			$sql = "INSERT INTO Locations (
-					APILocationID
+					  APILocationID
 					, Name
 					, Address
 					, Phone
@@ -69,7 +71,7 @@ switch ($postType) {
 					, Country
 					)
 					VALUES (
-					'{$items->id}'
+					  '{$items->id}'
 					, '{$items->name}'
 					, '{$insertAddress}'
 					, '{$insertPhone}'
@@ -83,6 +85,7 @@ switch ($postType) {
 		$conn->close();
 		echo ($response);
 		break;
+
 	case "fetchImages":
 		$locationId = $_POST['locationId'];
 		
@@ -96,6 +99,38 @@ switch ($postType) {
 		
 		echo ($response);	
 		break;
+
+	case "registerUser":
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+		$email = $_POST['register-email'];
+		$password = $_POST['register-password'];
+		
+		$sql = "INSERT INTO Users (
+					Email
+				  , Password
+			    )
+				VALUES (
+					'{$email}'
+				  , '{$password}'
+			    );";
+
+		if ($conn->query($sql) === TRUE) {
+			echo 1;
+		} 
+		else {
+			echo 0;
+		}
+		$conn->close();
+		break;
+
+	case "loginUser":
+		break;
+
 	default:
         echo "Something went wrong";
 }

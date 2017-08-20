@@ -27,7 +27,7 @@ $('#search-locations-button').click(function() {
 
 
 //Show images for a location in a lightbox
-$("#search-results").on("click", ".view-images", function(event) {
+$('#search-results, #saved-locations-container').on('click', '.view-images', function(event) {
 	var locationId = $(this).siblings('[name=location-id]').val();
 
 	$.post('posts.php', {postType: 'fetchImages', locationId: locationId}, function(data) {
@@ -37,15 +37,39 @@ $("#search-results").on("click", ".view-images", function(event) {
 
 		for (var key in results) {
 			var imageLink = { 
-				src:  results[key].prefix + "original"  + results[key].suffix
+				src:  results[key].prefix + 'original'  + results[key].suffix
 			};
 			lightboxData.push(imageLink);
 		}
 
 		$.fancybox.open(lightboxData, {
 			loop : true,
-			hash : "test"
+			hash : 'test'
 		});
 
 	});
+})
+
+//Register user
+$('#register-button').click(function() {
+	$.post('posts.php', $('#register-form').serialize(), function(data) {
+		if(data == 1) { 
+			$.bootstrapGrowl('You have successfully registered. Please login.', {type: 'success', align: 'center', width: 'auto'});
+			$('#register-form')[0].reset();
+			$('[name=register-email').focus();
+		}
+		else {
+			$.bootstrapGrowl('This email has already been registered.', {type: 'danger', align: 'center', width: 'auto'});
+			$('#register-form')[0].reset();
+			$('[name=register-email').focus();
+		}	
+	});
+	return false;
+})
+
+//Login user
+$("#login-button").click(function() {
+	$.post('posts.php', $('#login-form').serialize(), function(data) {
+	});
+	return false;
 })

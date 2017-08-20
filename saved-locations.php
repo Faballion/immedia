@@ -12,14 +12,14 @@
 	$locations = $conn->query($sql);
 ?>
 
-<div class="container" style="height: 91.6vh">
+<main class="text-center py-5">
 	<br><br><br><br><br>
 	<h1>Saved Locations</h1>
 	<div id="saved-locations-container">
 		<?php	
 			if ($locations->num_rows > 0) {	
 				while($row = $locations->fetch_assoc()) {
-					echo '<div class="card location-card col-md-4">';
+					echo '<div class="card location-card col-md-3">';
 					echo '<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">';
 					echo '<div class="card-body">';
 					echo '<h4 class="card-title">' . $row['Name'] . '</h4>';
@@ -38,6 +38,6 @@
 			$conn->close();
 		?>
 	</div>
-</div>
+</main>
 
 <?php include 'footer.php' ?>
