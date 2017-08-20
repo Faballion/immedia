@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
 
-	<a class="navbar-brand" href="#">
+	<a class="navbar-brand" href="index.php">
 		<img id="immedia-logo" src="img/immedia.png" alt="immedia logo">
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,10 @@
 				<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">My Locations</a>
+				<a class="nav-link" href="saved-locations.php">Saved Locations</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="my-locations.php">My Locations</a>
 			</li>
 		</ul>
 

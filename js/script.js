@@ -33,7 +33,6 @@ $("#search-results").on("click", ".view-images", function(event) {
 	$.post('posts.php', {postType: 'fetchImages', locationId: locationId}, function(data) {
 		var obj = JSON.parse(data);
 		var results = obj.response.photos.items;
-
 		var lightboxData = [];
 
 		for (var key in results) {
