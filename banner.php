@@ -11,6 +11,7 @@
 				</li>
                 <li>
                     <form id="search-form">
+                        <input type="hidden" name="postType" value="searchLocations">
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="md-form">

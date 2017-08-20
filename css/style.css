@@ -47,3 +47,11 @@
 .view input[type="text"]:focus:not([readonly])+label {
 	color: #fff;
 }
+
+/*----------- card styles ------------*/
+.location-card {
+	display: inline-block;
+	margin: 15px;
+	max-height: 600px;
+	padding: 0px;
+}
