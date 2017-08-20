@@ -129,10 +129,35 @@ switch ($postType) {
 		break;
 
 	case "loginUser":
+
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+		$email = $_POST['login-email'];
+		$password = $_POST['login-password'];
+
+		$sql = "SELECT UserID FROM Users WHERE Email = '$email' and Password = '$password'";
+		$result = $conn->query($sql);
+		
+		$count = mysqli_num_rows($result);
+		
+		if($count == 1) {
+		   session_start();
+		   $_SESSION["email"] = $email;
+		   echo 1;
+		}
+		else {
+		   echo 0;
+		}
+		
+		$conn->close();
 		break;
 
 	default:
-        echo "Something went wrong";
+        echo "Something went wrong.";
 }
 
 ?>

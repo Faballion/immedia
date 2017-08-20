@@ -70,6 +70,14 @@ $('#register-button').click(function() {
 //Login user
 $("#login-button").click(function() {
 	$.post('posts.php', $('#login-form').serialize(), function(data) {
+		if(data == 1) { 
+			window.location.href = "my-locations.php";
+		}
+		else {
+			$.bootstrapGrowl('Incorrect username or password.', {type: 'danger', align: 'center', width: 'auto'});
+			$('#login-form')[0].reset();
+			$('[name=login-email').focus();
+		}	
 	});
 	return false;
 })

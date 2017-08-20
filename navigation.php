@@ -16,9 +16,13 @@
 			<li class="nav-item">
 				<a class="nav-link" href="saved-locations.php">Saved Locations</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="my-locations.php">My Locations</a>
-			</li>
+			<?php session_start();
+			if (isset($_SESSION['email'])) {
+				echo '<li class="nav-item">';
+				echo '	<a class="nav-link" href="my-locations.php">My Locations</a>';
+				echo '</li>';
+			}
+			?>
 		</ul>
 
 		<ul class="navbar-nav ml-auto nav-flex-icons">
@@ -32,8 +36,15 @@
 				<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> 
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="login.php">Login</a>
-					<a class="dropdown-item" href="register.php">Register</a>
+					<?php 
+					if (isset($_SESSION['email'])) {
+						echo '<a class="dropdown-item" href="logout.php">Logout</a>';
+					}
+					else {
+						echo '<a class="dropdown-item" href="login.php">Login</a>';
+						echo '<a class="dropdown-item" href="register.php">Register</a>';
+					}
+					?>					
 				</div>
 			</li>
 		</ul>

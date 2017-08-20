@@ -7,7 +7,7 @@
 
 /*----------- navigation.php styles ------------*/
 .navbar {
-	background-color: transparent;
+	background-color: #6a1b9a ;
 }
 
 .top-nav-collapse {
@@ -46,6 +46,20 @@
 
 .view input[type="text"]:focus:not([readonly])+label {
 	color: #fff;
+}
+
+#register-form input:focus:not([readonly]), #login-form input:focus:not([readonly])  {
+	border-color: #6a1b9a;
+	box-shadow: 0 1px 0 0 #6a1b9a;
+	color: #000;
+}
+
+#register-form input:not([readonly])+label, #login-form input:not([readonly])+label {
+	color: #000;
+}
+
+#register-form input:focus:not([readonly])+label, #login-form input:focus:not([readonly])+label {
+	color: #6a1b9a;
 }
 
 /*----------- card styles ------------*/
