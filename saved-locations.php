@@ -28,7 +28,9 @@
 					echo '</p>';
 					echo '<input type="hidden" name="location-id" value="'. $row['APILocationID'] .'">';
 					echo '<button class="btn purple darken-3 waves-effect waves-light view-images">View Images</button>';
-					echo '<button class="btn purple darken-3 waves-effect waves-light add-my-locations">Add to My Locations</button>';
+					if (isset($_SESSION['email'])) {
+						echo '<button class="btn purple darken-3 waves-effect waves-light add-my-locations">Add to My Locations</button>';
+					}
 					echo '</div></div>';
 				}
 			}
