@@ -9,7 +9,7 @@
 	$conn = new mysqli($servername, $username, $password, $dbname);
 
 	$sql = "SELECT * FROM Locations ORDER BY LocationID DESC";
-	$locations = $conn->query($sql);
+	$locations = mysqli_query($conn, $sql);
 ?>
 
 <main class="text-center py-5">
@@ -17,7 +17,7 @@
 	<h1>Saved Locations</h1>
 	<div id="saved-locations-container">
 		<?php	
-			if ($locations->num_rows > 0) {	
+			if (mysqli_num_rows($locations) > 0) {
 				while($row = $locations->fetch_assoc()) {
 					echo '<div class="card location-card col-md-3">';
 					echo '<img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">';

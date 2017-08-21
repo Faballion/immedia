@@ -27,7 +27,8 @@ $('#search-locations-button').click(function() {
 
 
 //Show images for a location in a lightbox
-$('#search-results, #saved-locations-container', '#my-locations-container').on('click', '.view-images', function(event) {
+$('#search-results, #saved-locations-container, #my-locations-container').on('click', '.view-images', function(event) {
+	console.log('clicked');
 	var locationId = $(this).siblings('[name=location-id]').val();
 
 	$.post('posts.php', {postType: 'fetchImages', locationId: locationId}, function(data) {
