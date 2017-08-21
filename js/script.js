@@ -53,6 +53,18 @@ $('#search-results, #saved-locations-container, #my-locations-container').on('cl
 
 //Register user
 $('#register-button').click(function() {
+	if($('[name=register-email').val().length < 5) {
+		$.bootstrapGrowl('Please make sure your email is larger than 5 characters.', {type: 'danger', align: 'center', width: 'auto'});
+		return false;
+	}
+	if($('[name=register-password').val().length < 5) {
+		$.bootstrapGrowl('Please make sure your password is larger than 5 characters.', {type: 'danger', align: 'center', width: 'auto'});
+		return false
+	}
+	if($('[name=register-password').val() != $('[name=register-confirm-password').val()) {
+		$.bootstrapGrowl('Please make sure your passwords match.', {type: 'danger', align: 'center', width: 'auto'});
+		return false
+	}
 	$.post('posts.php', $('#register-form').serialize(), function(data) {
 		if(data == 1) { 
 			$.bootstrapGrowl('You have successfully registered. Please login.', {type: 'success', align: 'center', width: 'auto'});
