@@ -88,5 +88,21 @@ $('#saved-locations-container').on('click', '.add-my-locations', function(event)
 	var locationId = $(this).siblings('[name=location-id]').val();
 	
 	$.post('posts.php', {postType: 'saveMyImages', locationId: locationId}, function(data) {
+		if(data == 1) { 
+			$.bootstrapGrowl('This location has been added to your profile.', {type: 'success', align: 'center', width: 'auto'});
+		}
+		else {
+			$.bootstrapGrowl('You already have this location in your profile.', {type: 'danger', align: 'center', width: 'auto'});
+		}	
 	});
+});
+
+//If user enters in search term, clear GPS coordinates
+$('[name=search-term]').keypress(function() {
+	$('[name=latitude], [name=longitude]').val('');
+});
+
+//If user enters GPS coordiantes, clear search term
+$('[name=latitude], [name=longitude]').keypress(function() {
+    $('[name=search-term]').val('');
 });

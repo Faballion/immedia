@@ -34,17 +34,17 @@
 
 
 /*----------- inputs styles ------------*/
-.view input[type="text"]:focus:not([readonly]) {
+.view input:focus:not([readonly]) {
 	border-color: #6a1b9a;
 	box-shadow: 0 1px 0 0 #6a1b9a;
 	color: #fff;
 }
 
-.view input[type="text"]:not([readonly])+label {
+.view input:not([readonly])+label {
 	color: rgba(255, 255, 255, .65);
 }
 
-.view input[type="text"]:focus:not([readonly])+label {
+.view input:focus:not([readonly])+label {
 	color: #fff;
 }
 

@@ -21,13 +21,13 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="md-form">
-                                    <input type="text" name="latitude" class="form-control validate">
+                                    <input type="number" name="latitude" class="form-control validate">
                                     <label for="form2" class="">Latitude</label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="md-form">
-                                    <input type="text" name="longitude" class="form-control validate">
+                                    <input type="number" name="longitude" class="form-control validate">
                                     <label for="form3" class="">Longitude</label>
                                 </div>
                             </div>

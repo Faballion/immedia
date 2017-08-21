@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,7 +16,12 @@ switch ($postType) {
 		
 		//Get locations via API
 		$curlhandle = curl_init();
-		curl_setopt($curlhandle, CURLOPT_URL, "https://api.foursquare.com/v2/venues/search?near=".$searchTerm."&client_id=EM1KDHK2V1ODUOI3JDEWF4VQ3PAFNAIIAIVB4EPHS2JE0CAW&client_secret=2MG0DBYG1YJT2YEUSC0RBBVPHAH23S2F44DEUP1MMPVXXDSQ&v=20170101");
+		if(strlen($searchTerm) > 0) {
+			curl_setopt($curlhandle, CURLOPT_URL, "https://api.foursquare.com/v2/venues/search?near=".urlencode($searchTerm)."&client_id=EM1KDHK2V1ODUOI3JDEWF4VQ3PAFNAIIAIVB4EPHS2JE0CAW&client_secret=2MG0DBYG1YJT2YEUSC0RBBVPHAH23S2F44DEUP1MMPVXXDSQ&v=20170101");
+		}
+		else {
+			curl_setopt($curlhandle, CURLOPT_URL, "https://api.foursquare.com/v2/venues/search?ll=".urlencode($latitude).",".urlencode($longitude)."&client_id=EM1KDHK2V1ODUOI3JDEWF4VQ3PAFNAIIAIVB4EPHS2JE0CAW&client_secret=2MG0DBYG1YJT2YEUSC0RBBVPHAH23S2F44DEUP1MMPVXXDSQ&v=20170101");
+		}
 		curl_setopt($curlhandle, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($curlhandle, CURLOPT_SSL_VERIFYPEER, false);
 		
@@ -144,7 +149,6 @@ switch ($postType) {
 		$count = mysqli_num_rows($result);
 		
 		if($count == 1) {
-		   session_start();
 		   $_SESSION["email"] = $email;
 		   echo 1;
 		}
@@ -169,16 +173,28 @@ switch ($postType) {
 		$sql2 = "SELECT LocationID FROM Locations WHERE APILocationID = '$locationId'";
 		$result2 = $conn->query($sql2);
 		
-		$sql3 = "INSERT INTO Users_Locations (
+		$sql3 = "INSERT IGNORE INTO Users_Locations (
 					UserID
 				  , LocationID
 				)
 				VALUES (
 					{$result->fetch_array()['UserID']}
 				  , {$result2->fetch_array()['LocationID']}
-				);";
-		
+				) 
+				/*WHERE NOT EXISTS (SELECT UserID, LocationID 
+								  FROM Users_Locations 
+								  WHERE UserID = {$result->fetch_array()['UserID']} 
+								  AND LocationID = {$result2->fetch_array()['LocationID']}
+								 )*/;";		
 		$result3 = $conn->query($sql3);
+		
+		if($result3) {
+		   echo 1;
+		}
+		else {
+		   echo 0;
+		}
+
 		$conn->close();
 		break;
 
