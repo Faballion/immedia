@@ -27,7 +27,7 @@ $('#search-locations-button').click(function() {
 
 
 //Show images for a location in a lightbox
-$('#search-results, #saved-locations-container').on('click', '.view-images', function(event) {
+$('#search-results, #saved-locations-container', '#my-locations-container').on('click', '.view-images', function(event) {
 	var locationId = $(this).siblings('[name=location-id]').val();
 
 	$.post('posts.php', {postType: 'fetchImages', locationId: locationId}, function(data) {
@@ -81,3 +81,11 @@ $("#login-button").click(function() {
 	});
 	return false;
 })
+
+//Save location to user's list of locations
+$('#saved-locations-container').on('click', '.add-my-locations', function(event) {
+	var locationId = $(this).siblings('[name=location-id]').val();
+	
+	$.post('posts.php', {postType: 'saveMyImages', locationId: locationId}, function(data) {
+	});
+});
